@@ -72,7 +72,8 @@
               "buildTarget": "ngrx-music:build:production"
             },
             "development": {
-              "buildTarget": "ngrx-music:build:development"
+              "buildTarget": "ngrx-music:build:development",
+              "port": 4201
             }
           },
           "defaultConfiguration": "development"
