@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ICounties } from '../shared/types/countries';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { ICounties } from '@shared/types/countries';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class CountriesService {
 
   constructor(private http: HttpClient) { }
 
-  countriesList() {
+  countriesList(): Observable<ICounties[]> {
     return this.http.get<ICounties[]>(`${this.apiUrl}/all`).pipe(tap(res => console.log(res)));
   }
 }

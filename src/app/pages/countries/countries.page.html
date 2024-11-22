@@ -1,3 +1,11 @@
-@if (countries$ | async; as countries) {
-  <pre>{{ countries | json }}</pre>
+@if (data$ | async; as data) {
+  <pre>{{data.isLoading}}</pre>
+  @if (data.isLoading) {
+    <loading />
+  }
+  @if (data.countries) {
+    @for (countries of data.countries | slice: 0: 20; track $index) {
+      <pre>{{countries |json}}</pre>
+    }
+  }
 }

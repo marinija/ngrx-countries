@@ -27,14 +27,14 @@ type Maps = {
 
 export interface ICounties {
     name: Name;
-    independent: boolean,
-    status: string,
+    independent: boolean;
+    status: string;
     capital: Array<string>;
     region: string;
     languages: {
-        eng: string
+        eng: string;
     },
-    latlng: Array<number>
+    latlng: Array<number>;
     maps: Maps;
     population: number,
     timezones: Array<string>;
@@ -42,4 +42,9 @@ export interface ICounties {
     flags: Flags;
     startOfWeek: string,
     capitalInfo: CapitalInfo;
+}
+
+export interface ICountryList {
+  countries: Array<ICounties>;
+  isLoading: boolean;
 }

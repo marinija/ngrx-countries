@@ -1,10 +1,9 @@
 import { inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { CountriesService } from "../services/countries.service";
 import { countryActions } from "./actions";
 import { catchError, exhaustMap, map, of } from "rxjs";
-import { ICounties } from "../shared/types/countries";
-import { debug } from 'node:util';
+import { ICounties } from '@shared/types/countries';
+import { CountriesService } from '@services/countries.service';
 
 export const countriesEffect = createEffect((
   actions$ = inject(Actions),
@@ -13,9 +12,7 @@ export const countriesEffect = createEffect((
   return actions$.pipe(
     ofType(countryActions.countries),
     exhaustMap(() => countriesService.countriesList().pipe(
-      map((countries: ICounties[]) => {
-        return countryActions.countriesSuccess({countries})
-      }),
+      map((countries: ICounties[]) => countryActions.countriesSuccess({countries})),
       catchError(() => of(countryActions.countriesFailure()))
     )
   )
