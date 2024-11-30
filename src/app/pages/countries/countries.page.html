@@ -1,11 +1,26 @@
-@if (data$ | async; as data) {
-  <pre>{{data.isLoading}}</pre>
-  @if (data.isLoading) {
-    <loading />
-  }
-  @if (data.countries) {
-    @for (countries of data.countries | slice: 0: 20; track $index) {
-      <pre>{{countries |json}}</pre>
+<div class="container">
+  <div class="mb-3">
+    <label for="search-movie" class="form-label">Search movie</label>
+    <input
+      type="text"
+      class="form-control"
+      id="search-movie"
+      [ngModel]="search"
+      (ngModelChange)="searchCountry($event)"
+      minlength="2"
+    />
+  </div>
+  @if (data$ | async; as data) {
+    <pre>{{ data.isLoading }}</pre>
+    @if (data.isLoading) {
+      <loading/>
+    }
+    @if (data.searchedCountries.length) {
+      <h2>Searched Countries</h2>
+      <country-list [countries]="data.searchedCountries"></country-list>
+    } @else if (data.countries.length) {
+      <h2>All countries list</h2>
+      <country-list [countries]="data.countries"></country-list>
     }
   }
-}
+</div>

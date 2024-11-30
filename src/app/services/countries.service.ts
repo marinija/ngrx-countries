@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
-import { ICounties } from '@shared/types/countries';
+import { map, Observable, tap } from 'rxjs';
+import { ICounties, ISearchedCountries } from '@shared/types/countries';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,12 @@ export class CountriesService {
   constructor(private http: HttpClient) { }
 
   countriesList(): Observable<ICounties[]> {
-    return this.http.get<ICounties[]>(`${this.apiUrl}/all`).pipe(tap(res => console.log(res)));
+    return this.http.get<ICounties[]>(`${this.apiUrl}/all`);
+  }
+
+  searchCountryName(search: string): Observable<ICounties[]> {
+    return this.http.get<ICounties[]>(`${this.apiUrl}/name/${search}`).pipe(
+      tap(response => console.log('Raw API response:', response))
+    );
   }
 }

@@ -1,0 +1,22 @@
+
+<div class="row">
+  @for (country of countries() | slice: 0: 20; track $index) {
+    <div class="col-md-4">
+      <div class="card">
+        <img [src]="country.flags.svg" [alt]="country.name.official" loading="lazy" />
+        <h2 class="card-header">{{ country.name.official }}</h2>
+        <div class="card-body">
+          <div class="card-title"></div>
+          <div class="card-text d-flex flex-column">
+            <span
+            >Country continents: @for (continent of country.continents; track $index) {
+              {{ continent }}
+            }
+            </span>
+            <span> Country timezone: {{ country.timezones[0] }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

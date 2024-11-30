@@ -48,3 +48,8 @@ export interface ICountryList {
   countries: Array<ICounties>;
   isLoading: boolean;
 }
+
+export interface ISearchedCountries {
+  search: string;
+  searchedCountries: ICounties[];
+}
