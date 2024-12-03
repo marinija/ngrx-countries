@@ -1,3 +1,5 @@
+import { IBackendErrors } from '@shared/types/backend-errors';
+
 type NativeName = {
   eng: {
     official: string;
@@ -47,9 +49,11 @@ export interface ICounties {
 export interface ICountryList {
   countries: Array<ICounties>;
   isLoading: boolean;
+  countriesFetchError: IBackendErrors;
 }
 
 export interface ISearchedCountries {
   search: string;
   searchedCountries: ICounties[];
+  searchFetchError: IBackendErrors;
 }

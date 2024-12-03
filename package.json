@@ -1,5 +1,5 @@
 {
-  "name": "ngrx-music",
+  "name": "ngrx-countries",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:ngrx-music": "node dist/ngrx-music/server/server.mjs"
+    "serve:ssr:ngrx-countries": "node dist/ngrx-music/server/server.mjs"
   },
   "private": true,
   "dependencies": {

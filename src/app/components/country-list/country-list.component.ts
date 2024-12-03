@@ -12,5 +12,5 @@ import { SlicePipe } from '@angular/common';
 })
 
 export class CountryListComponent {
-  countries = input.required<Array<ICounties>>();
+  countries = input.required<Array<ICounties> | undefined>();
 }

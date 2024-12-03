@@ -15,7 +15,10 @@
     @if (data.isLoading) {
       <loading/>
     }
-    @if (data.searchedCountries.length) {
+    @if (data.countriesFetchError) {
+      <pre>{{data.countriesFetchError |json}}</pre>
+    }
+    @if (data.searchedCountries?.length) {
       <h2>Searched Countries</h2>
       <country-list [countries]="data.searchedCountries"></country-list>
     } @else if (data.countries.length) {

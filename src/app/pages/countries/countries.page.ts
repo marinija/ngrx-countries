@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncPipe, SlicePipe } from '@angular/common';
+import { AsyncPipe, JsonPipe, SlicePipe } from '@angular/common';
 import { combineLatest, map, Observable, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
 import { countryActions } from '../../store/actions';
-import { selectCountriesState, selectIsLoading, selectSearchedCountries } from '../../store/reducer';
-import { ICounties, ICountryList } from '@shared/types/countries';
+import { selectCountriesFetchError, selectCountriesState, selectIsLoading, selectSearchedCountries, selectSearchFetchError } from '../../store/reducer';
+import { ICounties, ICountryList, ISearchedCountries } from '@shared/types/countries';
 import { LoadingComponent } from '@shared/loading/loading.component';
 import { CountryListComponent } from '@components/country-list/country-list.component';
 
@@ -17,13 +17,14 @@ import { CountryListComponent } from '@components/country-list/country-list.comp
     AsyncPipe,
     LoadingComponent,
     SlicePipe,
-    CountryListComponent
+    CountryListComponent,
+    JsonPipe
   ],
   standalone: true
 })
 export class CountriesPage implements OnInit {
 
-  data$!: Observable<ICountryList & {searchedCountries: ICounties[]}>;
+  data$!: Observable<ICountryList & Partial<ISearchedCountries>>;
   search = '';
 
   constructor(private store: Store) {
@@ -36,13 +37,17 @@ export class CountriesPage implements OnInit {
       countries: this.store.select(selectCountriesState).pipe(
         tap((countries) => console.log('countries emitted:', countries))
       ),
-      searchedCountries: this.store.select(selectSearchedCountries)
+      searchedCountries: this.store.select(selectSearchedCountries),
+      countriesFetchError: this.store.select(selectCountriesFetchError),
+      searchFetchError: this.store.select(selectSearchFetchError)
     }).pipe(
       tap((combined) => console.log('combineLatest emission:', combined)),
-      map(({ isLoading, countries, searchedCountries }) => ({
+      map(({ isLoading, countries, searchedCountries, countriesFetchError, searchFetchError }) => ({
         isLoading,
         countries: countries.countries,
-        searchedCountries
+        searchedCountries,
+        countriesFetchError,
+        searchFetchError
       }))
     );
   }

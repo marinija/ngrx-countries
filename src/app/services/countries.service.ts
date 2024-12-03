@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { ICounties, ISearchedCountries } from '@shared/types/countries';
+import { Params } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
